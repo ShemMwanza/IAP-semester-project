@@ -73,30 +73,30 @@
 
 
                                         </div>
-                                        <form id="updateProfile" method="post">
+                                        
                                         <div class="in-content">
 
                                             <div class="in-content-1">
-                                            
+                                            <form id="updateProfile" method="post">
                                                 <h3>First Name</h3>
-                                                <input type="text" id="fName" name="firstName" value="{{$firstName}}">
+                                                <input type="text" id="fNameProfile" name="firstName" value="{{$firstName}}">
                                                 <h3>Email</h3>
-                                                <input type="text" id="email" name="email" value="{{$email}}">
+                                                <input type="text" id="emailProfile" name="email" value="{{$email}}">
                                                 <h3>Description</h3>
-                                                <textarea type="text" id="description" name="description" value="{{$description}}"cols="30" rows="9"></textarea>
+                                                <textarea type="text" id="descriptionProfile" name="description" value="{{$description}}"cols="30" rows="9"></textarea>
                                             </div>
                                             <div class="in-content-2">
                                             <h3>Last Name</h3>
-                                                <input type="text" id="lName" name="lastName" value="{{$lastName}}">
+                                                <input type="text" id="lNameProfile" name="lastName" value="{{$lastName}}">
                                             
                                                 <h3>Talent</h3>
-                                                <input type="text" id="talent" name="talent" value="{{$talent}}">
+                                                <input type="text" id="talentProfile" name="talent" value="{{$talent}}">
                                                 <h3>Change Photo</h3>
                                                 <input type="file" id="photo" name="photo">
                                                 <button type="button" id="image_upload_file">Choose File</button>
                                                 <br>
                                                 <br>
-                                                <button id="updateProfile">Update</button>
+                                                <button id="updateProfileBtn">Update</button>
                                                 <p id="profileUpload_success" class="success"></p>
                                                 <p id="profileUpload_error" class="error"></p>
                                             </div>
@@ -114,7 +114,7 @@
                                 <div class="containerContent" id="containerContent">
                                     <span class="closePasswords">&times;</span>
                                     <div class="form-container sign-up-container">
-                                        <form id="formRegister" action="#">
+                                        <form id="formCPassword" action="#">
                                             <h1 id="title">Change Password</h1>
                                 
                                             <label>
