@@ -23,7 +23,8 @@
         $lastName=$loggedUserInfo['last_name'],
         $fullName= $firstName." ".$lastName,
         $description=($loggedUserInfo['description']),
-        $talent=($loggedUserInfo['talent'])
+        $talent=($loggedUserInfo['talent']),
+        $email=($loggedUserInfo['email'])
     }}
         <article>
             <div class="profile">
@@ -55,7 +56,7 @@
                                             <div class="navbar__right">
                                                 <p>{{$fullName}}</p>
 
-                                                <img src="{{'url(.idea\Pictures\profile.svg)'}}" alt="Avatar" class="avatar">
+                                                <img src="{{url('.idea\Pictures\profile.svg')}}" alt="Avatar" class="avatar">
 
 
                                             </div>
@@ -63,7 +64,7 @@
                                         <br>
 
                                         <div class="profile1">
-                                            <img id="pic" src="{{url('.idea\Pictures\man.jpeg')}}" alt="man">
+                                            <img id="pic"  alt="man" src="{{url('.idea\Pictures\man.jpeg')}}"/>
                                             <div class="profile-1">
                                                 <div class="profile-2-1">
                                                     <h1>{{$fullName}}</h1>
@@ -77,19 +78,22 @@
 
                                             <div class="in-content-1">
 
-                                                <h3>Full Name</h3>
-                                                <input type="text" id="fName" name="name" value="{{$firstName}}">
+                                                <h3>First Name</h3>
+                                                <input type="text" id="fName" name="firstName" value="{{$firstName}}">
                                                 <h3>Email</h3>
-                                                <input type="text" id="email" name="email" value="{{$lastName}}">
+                                                <input type="text" id="email" name="email" value="{{$email}}">
                                                 <h3>Description</h3>
-                                                <input type="text" id="description" name="$description" value="{{$description}}">
+                                                <input type="text" id="description" name="description" value="{{$description}}">
                                             </div>
                                             <div class="in-content-2">
+                                            <h3>Last Name</h3>
+                                                <input type="text" id="lName" name="lastName" value="{{$lastName}}">
+                                            
+                                                <h3>Talent</h3>
+                                                <input type="text" id="talent" name="talent" value="{{$talent}}">
                                                 <h3>Change Photo</h3>
                                                 <input type="file" id="photo" name="photo">
                                                 <button type="button" id="image_upload_file">Choose File</button>
-                                                <h3>Talent</h3>
-                                                <input type="text" id="talent" name="talent" value="{{$talent}}">
                                                 <br>
                                                 <br>
                                                 <button id="updateProfile">Update</button>
@@ -172,7 +176,7 @@
                                     <div class='navbar__right12'>
                                         <p>{{$fullName}}</p>
 
-                                        <img src='.idea\Pictures\profile.svg' alt='Avatar' class='avatar1'>
+                                        <img src="{{url('.idea\Pictures\profile.svg')}}" alt='Avatar' class='avatar1'>
 
 
                                     </div>

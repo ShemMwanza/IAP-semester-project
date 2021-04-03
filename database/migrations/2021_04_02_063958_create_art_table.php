@@ -15,7 +15,7 @@ class CreateArtTable extends Migration
     {
         Schema::create('art', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('user');
+            $table->foreignId('user_id')->constrained('users');
             $table->String('art_type');
             $table->String('art_caption');
             $table->String('art_path');

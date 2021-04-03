@@ -86,7 +86,7 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <script src="{{url('js/script.js')}}"></script>
+  <!-- <script src="{{url('js/script.js')}}"></script> -->
   <script src="{{url('js/dash.js')}}"></script>
 </body>
 

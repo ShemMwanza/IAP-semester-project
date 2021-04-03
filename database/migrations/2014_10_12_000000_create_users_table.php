@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
@@ -22,11 +22,19 @@ class CreateUsersTable extends Migration
             $table->string('description')->nullable();
             $table->string('profile_photo')->nullable();
             $table->string('password');
+            $table->string('talent')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
+        /** 
+             * Adding the column talen in the user table
+        */
+        // Schema::table('user', function (Blueprint $table) {
+        //     $table->integer('talent');
+        // });
     }
+
 
     /**
      * Reverse the migrations.

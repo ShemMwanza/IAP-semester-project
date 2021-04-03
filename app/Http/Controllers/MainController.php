@@ -39,7 +39,7 @@ class MainController extends Controller
         $request->validate([
             "firstName"=>"required",
             "lastName"=>"required",
-            "email"=>"required|email|unique:user",
+            "email"=>"required|email|unique:users",
             "password"=>"required|min:5|max:12",
             "confPassword"=>["required","min:5","max:12",
                 function($attribute,$value,$fail){

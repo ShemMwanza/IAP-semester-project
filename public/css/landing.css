@@ -230,10 +230,13 @@ section::after {
     text-align: center;
     background-color: #348DE6;
     height: 30px;
-    width: 80px;
+    width: 150px;
     border: none;
     overflow: hidden;
-    padding-top: 2px
+    padding-top: 7px;
+    margin-left: 0px;
+    margin-right: 10px;
+    border-radius: 18px;  
 }
 #updateProfile:hover{
     color: #348DE6;
@@ -492,13 +495,16 @@ color: white;
 }
 #image_upload_file{
     background-color: #348DE6;
+    text-align: center;
     border: none;
     outline: none;
     color: white;
-    height: 3vh;
+    height: 4vh;
     overflow: hidden;
-    padding-top: 2px;
-    margin-right: 10px   
+    padding-top: 10px;
+    margin-left: 0px;
+    margin-right: 10px;
+    border-radius: 18px;   
 }
 #photo{
     display: none;
