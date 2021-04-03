@@ -1,0 +1,511 @@
+html{
+    height: 100%;
+    width: 100%;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.profile{
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #707070;
+}
+.profile img{
+    margin-right:60px ;
+    margin-top: 30px;
+    width: 76px;
+    height: 105px;
+    border-radius: 102px;
+
+}
+.profile-1{
+    padding: 0;
+    
+}
+.profile-2{
+    display: flex;
+    height: 95px;
+    
+}
+.profile-2 h1{
+     color: #707070;
+     font-size: 28px;
+     overflow: hidden;
+
+}
+.profile-1 p{
+    overflow: hidden;
+    color: #707070;
+    font-size: 18px;
+    width: 90%;
+}
+#editProfile{
+    height: 23px;
+    border:none;
+    background: transparent;
+    margin-top: 21px;
+    margin-left: 85px;
+    overflow-y: hidden;
+}
+#editProfile i{
+  color: #348DE6;
+font-size: 23px;
+}
+
+#editProfile i:hover{
+    
+    cursor: pointer;
+    color: #9cbacc;
+}
+
+.body_div {
+    float: left;
+    width: 32.33%;
+    padding: 5px;
+    padding-left: 2px;
+    padding-top:1px ;
+    height: 50vh;
+}
+
+  
+  
+  .body::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+  
+ 
+  .body_div img:hover {
+    box-shadow: 0 0 2px 1px #348DE6;
+    cursor: pointer;
+
+}
+  .body_div button{
+      background-color:#348DE6 ;
+      color: #ffffff;
+      border: none;
+      height: 25px;
+      width: 50px;
+  }
+  .body_div p{
+      width: 60%;
+  }
+
+  .body_div button:hover{
+    cursor: pointer;
+    background-color:#ffffff ;
+    color: #348DE6;
+    border: 1px solid #348DE6;
+    height: 25px;
+    width: 50px;
+  }
+
+
+article {
+    padding: 20px;
+    padding-left: 40px;
+    padding-top:5px ;
+    width: 100%;
+    background-color: #ffffff;
+    height: 100%; 
+}
+
+section::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+
+@media (max-width: 600px) {
+    nav, article {
+        width: 100%;
+        height: auto;
+    }
+}
+*{
+    overflow-x: hidden;
+  }
+
+
+.modal {
+  
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); 
+  }
+  
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    margin-top: 1%;
+    border: 1px solid #888;
+    width: 80%; 
+  }
+  
+ 
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #348DE6;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .in-content{
+      display: flex;
+      padding: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  .in-content-1{
+      padding: 20px;
+      padding-top: 2px;
+  }
+  .in-content-2{
+    margin-left:10% ;
+  }
+  h3{
+      color: #707070;
+      font-size: 14px;
+      margin-top: 7%;
+  }
+ 
+  #description{
+    width: 100%;
+    height: 20vh;
+    outline: #348DE6;
+    border: 1px solid #348DE6;
+    color: #707070;
+    font-size: 18px;
+    margin-top: 3%;
+  }
+  #fName{
+    width: 100%;
+    height: 5vh;
+    outline: #348DE6;
+    border: 1px solid #348DE6;
+    color: #707070;
+    font-size: 18px;
+    margin-top: 3%;
+}
+#email{
+    width: 100%;
+    height: 5vh;
+    outline: #348DE6;
+    border: 1px solid #348DE6;
+    color: #707070;
+    font-size: 18px;
+    margin-top: 3%;
+}
+#talent{
+    width: 90%;
+    height: 5vh;
+    outline: #348DE6;
+    border: 1px solid #348DE6;
+    color: #707070;
+    font-size: 18px;
+    margin-top: 3%;
+}
+#updateProfile{
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    background-color: #348DE6;
+    height: 30px;
+    width: 80px;
+    border: none;
+    overflow: hidden;
+    padding-top: 2px
+}
+#updateProfile:hover{
+    color: #348DE6;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid #348DE6;
+}
+
+.navbar {
+    background: #ffffff;
+    grid-area: nav;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px 0 30px;
+    border-bottom: 1px solid lightgray;
+    overflow: hidden;
+   
+  }
+  
+  .nav_icon {
+    display: none;
+  }
+  
+  .nav_icon > i {
+    font-size: 26px;
+    color: #a5aaad;
+  
+  }
+  
+  .navbar__right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar__right p {
+    color: #348DE6;
+    font-size: 20px;
+  }
+
+  
+#logo {
+margin-top: 10px;
+margin-left: 0px;
+width: 40px;
+color: white;
+}
+#pic {
+    margin: 0;
+    padding: 0;
+    margin-right: 40px;
+}
+.profile1{
+    display: flex; 
+    width: 30%;
+    justify-content: center;
+    align-content: center;
+    margin-left: 30%;
+    padding-bottom: 2%;
+}
+.profile-2-1 h1 {
+    color: #348DE6;
+    margin-top: 30%;
+}
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 30px;
+  }
+#myModal{
+  display: none;
+}
+#Modal{
+  display: none;
+}
+.back{
+  color: #348DE6;
+  font-size: 30px;
+  margin-left:32% ;
+}
+.back:hover{
+  color: #6ca6e0;
+  cursor: pointer;
+} 
+
+
+.imageModal {
+  display: none; 
+  position: fixed; 
+  z-index: 1;
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+}
+
+.image_modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 500px;
+  border: none;
+  background: transparent;
+}
+
+
+.image_modal-content {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+.closeImage {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.closeImage:hover,
+.closeImage:focus {
+  color: #348DE6;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+.ReadMore.showlesscontent .SecSec,
+    .ReadMore.showlesscontent .readLess {
+        display: none;
+    }
+
+    .ReadMore.showmorecontent .readMore {
+        display: none;
+    }
+
+    .ReadMore .readMore,
+    .ReadMore .readLess {
+        font-weight: bold;
+        margin-left: 2px;
+        color: #b1b1b1;
+        cursor: pointer;
+    }
+
+    .ReadMoreWrapTxt.showmorecontent .SecSec,
+    .ReadMoreWrapTxt.showmorecontent .readLess {
+        display: block;
+    }
+    .ReadMore .readMore:focus{
+      padding-bottom: 50%;
+    }
+
+    .settings{
+     
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+  }
+  
+ 
+  .settings-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    margin-top: 1%;
+    border: 1px solid #888;
+    width: 30%; 
+    justify-content: center;
+    
+  }
+  
+  .closeSettings {
+    color: #348DE6;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .closeSettings:hover,
+  .closeSettings:focus {
+    color: #83b0dd;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .sProfile{
+    background: none;
+    color: #348DE6;
+    width: 80%; 
+    border: none;
+    border-bottom: 1px solid #348DE6;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-right: 50%;
+    height: 50%;
+    float: left;
+    outline: none;
+  }
+  .sProfile i{
+    font-size: 25px;
+  }
+  .scPassword{
+    background: none;
+    color: #348DE6;
+    width: 80%; 
+    border: none;
+    border-bottom: 1px solid #348DE6;
+    font-size: 18px;
+    padding-right: 19%;
+    outline: none;
+  }
+  .scPassword i{
+    font-size: 25px;
+  }
+  .settings-content button{
+    margin-left:20px ;
+    padding-bottom: 20px;
+  }
+  .settings-content h1{
+   font-size: 18px;
+  }
+
+.scPassword:hover{
+  cursor: pointer;
+  color: #6ca6e0;
+}
+.sProfile:hover{
+  cursor: pointer;
+  color: #6ca6e0;
+}
+#image_upload_file{
+    background-color: #348DE6;
+    border: none;
+    outline: none;
+    color: white;
+    height: 3vh;
+    overflow: hidden;
+    padding-top: 2px;
+    margin-right: 10px   
+}
+#photo{
+    display: none;
+}
+#image_upload_file:hover{
+    color: #348DE6;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid#348DE6;
+}
