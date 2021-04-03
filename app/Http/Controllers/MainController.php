@@ -8,6 +8,8 @@ use App\Models\User;
 class MainController extends Controller
 {
     protected $password;
+
+    /*Login Logic */
     function Login(Request $request)
     {
         $request->validate([
@@ -27,15 +29,14 @@ class MainController extends Controller
                 return back()->with('loginError',"Password not correct");
             }
         }
-       
-        return ($request->input());
-        // return view('auth.login');
     }
+
+    /*Registeration Logic */
     function register(Request $request)
     {
-       //return ($request->input());
-        // return view('register');
         $this->password=$request->input('password');
+        
+        //Validating the inputs
         $request->validate([
             "firstName"=>"required",
             "lastName"=>"required",
@@ -50,17 +51,18 @@ class MainController extends Controller
                 }
             ]
         ]);
-
+        
+        //using the User model to interact with the database 
         $user= new User;
-        $user->first_name=$request->input('firstName'); // $request->firstName
-        $user->last_name=$request->input('lastName'); // $request->lastName
-        $user->email=$request->input('email');// $request->email
+        $user->first_name=$request->input('firstName'); // alternatrive: $request->firstName
+        $user->last_name=$request->input('lastName'); // alternatrive: $request->lastName
+        $user->email=$request->input('email');// alternatrive: $request->email
         $user->user_type="Artist";
         $user->password=Hash::make($request->input('password'));
         $user->email=$request->input('email');
-
         $save= $user->save();
-
+        
+        //confirmation message logic
         if ($save) {
             return back()->with('success','New user has been successfully added to the database');
         }else {
@@ -68,34 +70,46 @@ class MainController extends Controller
         }
     }
 
-    function dashboard(){
-        $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
-       // return session('userId');
-        return view('artist.dashboard',$data);
-
+    /*Logout Logic*/
+    function logout(){
+        if (session()->has('userId')) {
+            session()->pull('userId');
+            return redirect('auth/login_&_register');
+        }
     }
 
+    /*routing to the dashboard*/
+    function dashboard(){
+        $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
+        return view('artist.dashboard',$data);
+    }
 
+    /*routing to the login and signup page */
     function display_login_register(){
         return view('auth.login_&_register');
     }
+    /*routing to the reset password page*/
     function getResetPasswordPage()
     {
         return view('auth.r_password');
     }
+    /*routing to the beautiful index page -_-*/
     function getIndexPage()
     {
         return view('index');
     }
+    /*routing to the Landing page */
     function getLandingPage()
     {
         $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
         return view('artist.landing',$data);
     }
+    /*routing to the craft uploading page */
     function getCraftPage()
     {
         return view('artist.craft');
     }
+    /*routing to the dashboard page */
     function getDashboardPage()
     {
         return view('artist.dashboard');

@@ -186,43 +186,6 @@ window.onclick = function (event) {
     clearMessageField();
 }
 
-// //For editing event
-// var modal2 = document.getElementById("editModal");
-
-// // var btn2 = document.getElementsByClassName("
-// // ");
-
-// var span2 = document.getElementsByClassName("closeEvent")[0];
-
-// function editEvent(eventId) {
-//     modal2.style.display = "block";
-//     let xmlhttp = new XMLHttpRequest();
-//     xmlhttp.onreadystatechange = function () {
-//         if (this.readyState == 4 && this.status == 200) {
-//             // console.log(this.responseText);
-//             let eventObject = JSON.parse(this.responseText);
-//             document.querySelector("#event_name").value = eventObject.event_name;
-//             document.querySelector("#event_description").value = eventObject.event_description;
-//             document.querySelector("#event_id").value = eventId;
-//         }
-//     };
-//     xmlhttp.open("POST", "Logic/logic2.php", true);
-//     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//     var data = "event_id=" + eventId + "&type=getEventData";
-//     xmlhttp.send(data);
-// }
-
-// span2.onclick = function () {
-//     modal2.style.display = "none";
-//     clearMessageField();
-// }
-
-// window.onclick = function (event) {
-//     if (event.target == modal2) {
-//         modal2.style.display = "none";
-//     }
-//     clearMessageField();
-// }
 
 //For Craft changing button
 function changeCraft() {
@@ -260,41 +223,19 @@ function craftDelete() {
         xmlhttp.send(data);
     }
 }
-function deleteEvent() {
-    if (confirm("Do you really want to delete this event?")) {
-        let eventId = document.querySelector("#event_id").value;
-        let xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == "Successful") {
-                    $("#eventEdit_success").text("Event Deleted Successfully");
-                } else {
-                    $("#eventEdit_error").text(this.responseText);
-                }
-            }
-        };
-        xmlhttp.open("POST", "Logic/logic2.php", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        var data = "event_id=" + eventId + "&type=deleteEvent";
-        xmlhttp.send(data);
-    }
-
-}
 
 $(document).ready(function () {
-    $("#update_profile").submit(function (event) {
+    $("#updateProfile").submit(function (event) {
         event.preventDefault();
         clearMessageField();
-        let form = $("#update_profile")[0];
-        let formData = new FormData(form);
-        formData.append("type", "updateProfile");
+        let formData = new FormData($(this)[0]);
         let formEmpty = false;
         for (var value of formData.entries()) {
             formEmpty = (value[1] == "" && value['name'] != null) ? true : false;
         }
         if (!formEmpty) {
             $.ajax({
-                url: 'Logic/logic2.php',
+                url: 'artist/updateProfile',
                 enctype: 'multipart/form-data',
                 data: formData,
                 processData: false,
@@ -318,41 +259,7 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-    $('#eventEdit').submit(function (event) {
-        event.preventDefault();
-        clearMessageField();
-        let formData = new FormData($(this)[0]);
-        formData.append("type", "updateEvent");
-        let formEmpty = false;
-        for (var value of formData.entries()) {
-            formEmpty = (value[1] == "") ? true : false;
-        }
-        if (!formEmpty) {
-            $.ajax({
-                url: 'Logic/logic2.php',
-                enctype: 'multipart/form-data',
-                data: formData,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                success: function (data) {
-                    if (data == "Successful") {
-                        $("#eventEdit_success").text("Event Updated Successfully");
-                    } else {
-                        $("#eventEdit_error").text(data);
-                    }
-                },
-                error: function (e) {
-                    alert(e.responseText);
-                    console.log("ERROR : ", e);
-                }
-            });
-        } else {
-            $(".error").text("All fields are required");
-        }
-    });
-});
+// 
 $(document).ready(function () {
     $('#craftEdit').submit(function (event) {
         event.preventDefault();
@@ -388,3 +295,108 @@ $(document).ready(function () {
         }
     });
 });
+
+document.getElementById("image_upload_file").onclick= function() {
+    document.getElementById('photo').click();
+}
+
+
+
+
+
+
+
+
+// function deleteEvent() {
+//     if (confirm("Do you really want to delete this event?")) {
+//         let eventId = document.querySelector("#event_id").value;
+//         let xmlhttp = new XMLHttpRequest();
+//         xmlhttp.onreadystatechange = function () {
+//             if (this.readyState == 4 && this.status == 200) {
+//                 if (this.responseText == "Successful") {
+//                     $("#eventEdit_success").text("Event Deleted Successfully");
+//                 } else {
+//                     $("#eventEdit_error").text(this.responseText);
+//                 }
+//             }
+//         };
+//         xmlhttp.open("POST", "Logic/logic2.php", true);
+//         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//         var data = "event_id=" + eventId + "&type=deleteEvent";
+//         xmlhttp.send(data);
+//     }
+
+// }
+
+//$(document).ready(function () {
+    //     $('#eventEdit').submit(function (event) {
+    //         event.preventDefault();
+    //         clearMessageField();
+    //         let formData = new FormData($(this)[0]);
+    //         formData.append("type", "updateEvent");
+    //         let formEmpty = false;
+    //         for (var value of formData.entries()) {
+    //             formEmpty = (value[1] == "") ? true : false;
+    //         }
+    //         if (!formEmpty) {
+    //             $.ajax({
+    //                 url: 'Logic/logic2.php',
+    //                 enctype: 'multipart/form-data',
+    //                 data: formData,
+    //                 processData: false,
+    //                 contentType: false,
+    //                 type: 'POST',
+    //                 success: function (data) {
+    //                     if (data == "Successful") {
+    //                         $("#eventEdit_success").text("Event Updated Successfully");
+    //                     } else {
+    //                         $("#eventEdit_error").text(data);
+    //                     }
+    //                 },
+    //                 error: function (e) {
+    //                     alert(e.responseText);
+    //                     console.log("ERROR : ", e);
+    //                 }
+    //             });
+    //         } else {
+    //             $(".error").text("All fields are required");
+    //         }
+    //     });
+    // });
+// //For editing event
+// var modal2 = document.getElementById("editModal");
+
+// // var btn2 = document.getElementsByClassName("
+// // ");
+
+// var span2 = document.getElementsByClassName("closeEvent")[0];
+
+// function editEvent(eventId) {
+//     modal2.style.display = "block";
+//     let xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function () {
+//         if (this.readyState == 4 && this.status == 200) {
+//             // console.log(this.responseText);
+//             let eventObject = JSON.parse(this.responseText);
+//             document.querySelector("#event_name").value = eventObject.event_name;
+//             document.querySelector("#event_description").value = eventObject.event_description;
+//             document.querySelector("#event_id").value = eventId;
+//         }
+//     };
+//     xmlhttp.open("POST", "Logic/logic2.php", true);
+//     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     var data = "event_id=" + eventId + "&type=getEventData";
+//     xmlhttp.send(data);
+// }
+
+// span2.onclick = function () {
+//     modal2.style.display = "none";
+//     clearMessageField();
+// }
+
+// window.onclick = function (event) {
+//     if (event.target == modal2) {
+//         modal2.style.display = "none";
+//     }
+//     clearMessageField();
+// }

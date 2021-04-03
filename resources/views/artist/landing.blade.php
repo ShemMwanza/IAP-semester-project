@@ -73,17 +73,17 @@
 
 
                                         </div>
-
+                                        <form id="updateProfile" method="post">
                                         <div class="in-content">
 
                                             <div class="in-content-1">
-
+                                            
                                                 <h3>First Name</h3>
                                                 <input type="text" id="fName" name="firstName" value="{{$firstName}}">
                                                 <h3>Email</h3>
                                                 <input type="text" id="email" name="email" value="{{$email}}">
                                                 <h3>Description</h3>
-                                                <input type="text" id="description" name="description" value="{{$description}}">
+                                                <textarea type="text" id="description" name="description" value="{{$description}}"cols="30" rows="9"></textarea>
                                             </div>
                                             <div class="in-content-2">
                                             <h3>Last Name</h3>
@@ -97,9 +97,11 @@
                                                 <br>
                                                 <br>
                                                 <button id="updateProfile">Update</button>
+                                                <p id="profileUpload_success" class="success"></p>
+                                                <p id="profileUpload_error" class="error"></p>
                                             </div>
                                         </div>
-
+                                        </form>
 
                                     </div>
                                 </div>

@@ -18,5 +18,8 @@ function closeSidebar() {
   }
 }
 document.getElementById("logo").onclick = function () {
-      location.href = "index.html";
+      location.href = "index";
     };
+document.getElementById("logout").onclick= function() {
+     location.href="logout"
+}

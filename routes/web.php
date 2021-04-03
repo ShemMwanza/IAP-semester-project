@@ -27,3 +27,5 @@ Route::get('artist/craft',[MainController::class,'getCraftPage']);
 Route::post('/auth/login',[MainController::class,'login']);
 Route::post('/auth/register',[MainController::class,'register']);
 Route::get('artist/dashboard',[MainController::class,'dashboard']);
+Route::get('artist/logout',[MainController::class,'logout']);
+Route::post('artist/updateProfile',[MainController::class,'updateProfile']);
