@@ -46,7 +46,7 @@ class MainController extends Controller
                 function($attribute,$value,$fail){
                     global $password;
                     if ($value!=$this->password) {
-                        $fail("Password Mismatch Value= ".$value." Password= ".$password);
+                        $fail("Password Mismatch");
                     }
                 }
             ]
@@ -77,6 +77,63 @@ class MainController extends Controller
             return redirect('auth/login_&_register');
         }
     }
+
+    /*logic for updating a profile*/
+    function updateProfile(Request $request){
+        
+        $request->validate([
+            "firstName"=>"required",
+            "lastName"=>"required",
+            "email"=>"required|email",
+            "talent"=>"required",
+            "description"=>"required",
+            ]
+        );
+        
+        $firstName=$request->firstName;
+        $lastName=$request->lastName;
+        $description= $request->description;
+        $photo=$request->file('photo');
+        $talent=$request->talent;
+        $lastData= User::latest()->first();
+        $lastId=$lastData->id;
+        $email=$request->email;
+        if ($photo!=null) {
+            $profilePhotoPath = $photo->storeAs(
+                'file', ('profilePhoto'.$lastId)
+            );
+            $user= User::where('id',session('userId'))->update([
+                'first_name'=>$firstName,
+                'last_name'=>$lastName,
+                'description'=>$description,
+                'profile_photo'=>$profilePhotoPath,
+                'talent'=>$talent,
+                'email'=>$email
+            ]) ;
+            if ($user) {
+                return response("success");
+            }else {
+                return response("Upload Error");
+            }
+        }else {
+            $user= User::where('id',session('userId'))->update([
+                'first_name'=>$firstName,
+                'last_name'=>$lastName,
+                'description'=>$description,
+                'talent'=>$talent,
+                'email'=>$email
+            ]) ;
+            if ($user) {
+                return response("success");
+            }else {
+                return response("Upload Error");
+            }
+        }
+
+        // $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
+        // return view('artist.dashboard',$data);
+    }
+
 
     /*routing to the dashboard*/
     function dashboard(){
