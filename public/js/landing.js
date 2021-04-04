@@ -231,25 +231,31 @@ $(document).ready(function () {
         let formData = new FormData($(this)[0]);
         let formEmpty = false;
         for (var value of formData.entries()) {
-            formEmpty = (value[1] == "" && value['name'] != null) ? true : false;
+            formEmpty = (value[1] == "") ? true : false;
+            if (formEmpty) {
+                break;
+            }
         }
         if (!formEmpty) {
             $.ajax({
-                url: 'artist/updateProfile',
+                url: 'updateProfile',
                 enctype: 'multipart/form-data',
                 data: formData,
                 processData: false,
                 contentType: false,
                 type: 'POST',
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (data) {
-                    if (data == "Successful") {
+                    if (data == "success") {
                         $("#profileUpload_success").text("Profile Updated Successfully");
                     } else {
+                        console.log(data);  
                         $("#profileUpload_error").text(data);
                     }
                 },
                 error: function (e) {
-                    alert(e.responseText);
                     console.log("ERROR : ", e);
                 }
             });
