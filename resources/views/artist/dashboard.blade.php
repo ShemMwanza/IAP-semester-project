@@ -72,10 +72,10 @@
           <i class="fa fa-plus"></i>
           <a href="{{url('artist/craft')}}" target="frame">Upload Craft</a>
         </div>
-        <div class="sidebar__link">
+        <!-- <div class="sidebar__link">
           <i class="fa fa-plus"></i>
           <a href="uEvents.html" target="frame">Upload Event</a>
-        </div>
+        </div> -->
 
 
 
