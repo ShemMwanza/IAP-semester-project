@@ -196,7 +196,7 @@
                                             <h3>Change Media File</h3>
                                             <input type='file' id='craft_file' name='craft_file'>
                                             <button type='button' class='file_selector'
-                                                onclick='changeEvent()'>Change</button>
+                                                onclick='changeCraft()'>Change</button>
                                             <h3>Change Caption</h3>
                                             <textarea type='text' id='craft_description'
                                                 name='craft_description'></textarea>
