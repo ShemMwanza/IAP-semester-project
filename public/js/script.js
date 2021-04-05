@@ -43,6 +43,33 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function(){
+  $("#addPhoto").submit(function(event){
+    event.preventDefault();
+    clearMessageField();
+    let formdata = new FormData(this[0]);
+    $.ajax({
+      url: "{{route('craft.add')}}",
+      enctype: 'multipart/form-data',
+      data: formdata,
+      processData: false,
+      contentType: false,
+      type: 'POST',
+      success: function(data){
+          if (data=="success") {
+              $(".success").text("Craft Uploaded Successfully");
+          } else {
+              $(".error").text(data);
+          }
+      },
+      error: function (e) {
+          alert(e.responseText);
+          console.log("ERROR : ", e);
+      }
+      });        
+    });
+  });
+
 $(document).ready(function () {
   $("#rFormLogin").submit(function (event) {
       event.preventDefault();

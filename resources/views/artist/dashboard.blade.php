@@ -11,11 +11,11 @@
 </head>
 
 <body id="body">
-{{
+<!-- {{
         $firstName=($loggedUserInfo['first_name']),
         $lastName= ($loggedUserInfo['last_name']),
         $fullName= $loggedUserInfo['first_name']." ".$loggedUserInfo['last_name']
-    }}
+    }} -->
   <div class="container">
 
     <nav class="navbar">

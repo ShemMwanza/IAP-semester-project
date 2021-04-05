@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Art;
 class MainController extends Controller
 {
     protected $password;
@@ -132,6 +133,48 @@ class MainController extends Controller
 
         // $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
         // return view('artist.dashboard',$data);
+    }
+
+    function addCraft(Request $request){
+        // $request->validate([
+        //     // "art_type"=>"required",
+        //     "photo"=>"required",
+        //     "caption"=>"required|email",
+        //     ]
+        // );
+
+        $craft_file = $request->file('photo');
+        $lastId= Art::latest()->first();
+
+        //dd($request);
+        //$array = explode( ".", $craft_file);
+        //$craft_type = get_content_type($array[1]);
+        // if($craft_type == "Decline"){
+        //     return response()->json("Ensure your upload is an image/video/audio");
+        // }else{
+               
+        // }
+        if($lastId == null){
+            $lastId = 0;
+        }
+         // $profilePhotoPath = $photo->storeAs(
+         //        'file', ('profilePhoto'.$lastId)
+         //    );
+        //dd($craft_file);
+        $craft_upload_path = $craft_file->storeAs('file', ('craft'.$lastId));
+        $art = new Art;
+        $art->user_id=session('userId');
+        $art->art_type="Drawing"; // alternatrive: $request->firstName
+        $art->art_caption=$request->input('caption'); // alternatrive: $request->lastName
+        $art->art_path=$craft_upload_path;// alternatrive: $request->email
+        $save = $art->save();         
+
+        //confirmation message logic
+        if ($save) {
+            return response()->json('success');
+        }else {
+            return response()->json('Oops, Something went wrong');
+        }       
     }
 
 
