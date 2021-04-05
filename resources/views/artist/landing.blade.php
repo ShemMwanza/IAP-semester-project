@@ -5,6 +5,7 @@
     <title>landing</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{url('css/landing.css')}}"  type="text/css" rel="stylesheet" />
     <link href="{{url('css/editCraft.css')}}" type="text/css" rel="stylesheet" />
     <link href="{{url('css/cPassword.css')}}" type="text/css" rel="stylesheet" />
@@ -22,7 +23,7 @@
         $firstName=$loggedUserInfo['first_name'],
         $lastName=$loggedUserInfo['last_name'],
         $fullName= $firstName." ".$lastName,
-        $description=($loggedUserInfo['description']),
+        $description=$loggedUserInfo['description'],
         $talent=($loggedUserInfo['talent']),
         $email=($loggedUserInfo['email'])
     }}
@@ -101,6 +102,7 @@
                                                 <p id="profileUpload_error" class="error"></p>
                                             </div>
                                         </div>
+                                        {!! csrf_field() !!}
                                         </form>
 
                                     </div>
