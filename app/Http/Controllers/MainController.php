@@ -139,8 +139,30 @@ class MainController extends Controller
         // $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
         // return view('artist.dashboard',$data);
     }
-
-
+    /*Chnage Password */
+    function changePassword(Request $request){
+        $currentPassword= $request->current;
+        $newPassword= $request->nPassword;
+        $confirmNewPassword= $request->confirmPassword;
+        $user=User::where('id','=',session('userId'))->first();
+        if ($newPassword!=$confirmNewPassword) {
+            return response()->json(["error"=>"Password Mismatch"], 200);
+        }else {
+            if(Hash::check($currentPassword, $user->password) ){
+                return response()->json(['error'=>'wrong current password'], 200);
+            }else {
+                $update= User::where('id','=',session('userId'))->update([
+                    "password"=>Hash::make($newPassword)
+                ]);
+                if ($update) {
+                    return response()->json(["success"=>"Password updated Successfully"], 200);
+                }else {
+                    return response()->json(["error"=>"Oops! Something went wrong"], 200);
+                }
+            }    
+        }
+        
+    }
     /*routing to the dashboard*/
     function dashboard(){
         $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];

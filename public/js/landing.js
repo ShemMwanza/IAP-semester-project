@@ -229,6 +229,57 @@ function craftDelete() {
 }
 
 $(document).ready(function () {
+    $("#formCPassword").submit(function (event) {
+        console.log("called");
+        event.preventDefault();
+        clearMessageField();
+        let formData = new FormData($(this)[0]);
+        let formEmpty = false;
+        for (var value of formData.entries()) {
+            formEmpty = (value[1] == "") ? true : false;
+            if (formEmpty) {
+                break;
+            }
+        }
+        if (!formEmpty) {
+            if (formData.get('nPassword')==formData.get('confirmPassword')) {
+                console.log("called2");
+                $.ajax({
+                    url: 'changePassword',
+                    enctype: 'multipart/form-data',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        //data= JSON.parse(data);
+                        for (const type in data) {
+                            if (type=="success") {
+                                $("#changePasswordSuccess").text(data[type]);
+                            } else {
+                                $("#changePasswordError").text(data[type]);
+                            }
+                        }
+                    },
+                    error: function (e) {
+                        console.log("ERROR : ", e);
+                    }
+                });
+            }else{
+                $("#changePasswordError").text("Password Mismatch");
+            }
+           
+        } else {
+            $("#changePasswordError").text("All fields are required");
+        }
+    });
+});
+
+//chnage Password
+$(document).ready(function () {
     $("#updateProfile").submit(function (event) {
         event.preventDefault();
         clearMessageField();

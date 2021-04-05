@@ -117,7 +117,7 @@
                                 <div class="containerContent" id="containerContent">
                                     <span class="closePasswords">&times;</span>
                                     <div class="form-container sign-up-container">
-                                        <form id="formCPassword" action="#">
+                                        <form id="formCPassword" action="changePassword" method="post">
                                             <h1 id="title">Change Password</h1>
                                 
                                             <label>
@@ -125,7 +125,8 @@
                                                 <input id="nPassword" name="nPassword" type="password" placeholder="New Password" />
                                                 <input id="confirmPassword" name="confirmPassword" placeholder="Confirm New Password" type="password" />
                                             </label>
-                                
+                                            <p id="changePasswordSuccess" class="success"></p>
+                                                <p id="changePasswordError" class="error"></p>
                                             <button type="submit" name="cPassword" id="cPassword">Confirm</button>
                                             <p id="Message" style='color:red; margin-left: 39px;'></p>
                                         </form>
