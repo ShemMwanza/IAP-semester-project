@@ -232,10 +232,10 @@
                         <img id="img" class="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
                         <div id="imageModal" class="imageModal">
 
-                            <!-- The Close Button -->
+                            <!-- The Close Button
                             <span class="closeImage">&times;</span>
 
-                            <!-- Modal Content (The Image) -->
+                           Modal Content (The Image) -->
                             <img class="image_modal-content" id="img01" class="img01">
 
                         </div>
