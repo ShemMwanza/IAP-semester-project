@@ -98,15 +98,21 @@ class MainController extends Controller
         $lastData= User::latest()->first();
         $lastId=$lastData->id;
         $email=$request->email;
+       
+        // dd($fileExtension);
         if ($photo!=null) {
+            $fileExtension= $photo->extension();
+            $fileName='profilePhoto'.$lastId.'.'.$fileExtension;
             $profilePhotoPath = $photo->storeAs(
-                'file', ('profilePhoto'.$lastId)
+                'public/Image', ($fileName)
             );
+            // unlink()
+            //$profilePhotoPath=$photo->store('file');
             $user= User::where('id',session('userId'))->update([
                 'first_name'=>$firstName,
                 'last_name'=>$lastName,
                 'description'=>$description,
-                'profile_photo'=>$profilePhotoPath,
+                'profile_photo'=>$fileName,
                 'talent'=>$talent,
                 'email'=>$email
             ]) ;

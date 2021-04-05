@@ -14,7 +14,8 @@
 {{
         $firstName=($loggedUserInfo['first_name']),
         $lastName= ($loggedUserInfo['last_name']),
-        $fullName= $loggedUserInfo['first_name']." ".$loggedUserInfo['last_name']
+        $fullName= $loggedUserInfo['first_name']." ".$loggedUserInfo['last_name'],
+        $profilePhoto=($loggedUserInfo['profile_photo'])
     }}
   <div class="container">
 
@@ -34,7 +35,7 @@
       <div class="navbar__right">
         <p>{{$fullName}}</p>
 
-        <img src="{{url('.idea\Pictures\profile.svg')}}" alt="Avatar" class="avatar">
+        <img src="{{asset('/storage/Image/'.$profilePhoto)}}" alt="Avatar" class="avatar">
 
         
       </div>

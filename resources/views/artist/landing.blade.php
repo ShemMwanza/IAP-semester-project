@@ -25,11 +25,12 @@
         $fullName= $firstName." ".$lastName,
         $description=$loggedUserInfo['description'],
         $talent=($loggedUserInfo['talent']),
-        $email=($loggedUserInfo['email'])
+        $email=($loggedUserInfo['email']),
+        $profilePhoto=($loggedUserInfo['profile_photo'])
     }}
         <article>
             <div class="profile">
-                <img src="{{url('.idea\Pictures\man.jpeg')}}" alt="man">
+                <img src="{{asset('/storage/Image/'.$profilePhoto)}}" alt="man">
                 <div class="profile-1">
                     <div class="profile-2">
                     <h1>{{$fullName}}</h1>
@@ -65,7 +66,7 @@
                                         <br>
 
                                         <div class="profile1">
-                                            <img id="pic"  alt="man" src="{{url('.idea\Pictures\man.jpeg')}}"/>
+                                            <img id="pic"  alt="man" src="{{asset('/storage/Image/'.$profilePhoto)}}"/>
                                             <div class="profile-1">
                                                 <div class="profile-2-1">
                                                     <h1>{{$fullName}}</h1>
@@ -84,7 +85,7 @@
                                                 <h3>Email</h3>
                                                 <input type="text" id="emailProfile" name="email" value="{{$email}}">
                                                 <h3>Description</h3>
-                                                <textarea type="text" id="descriptionProfile" name="description" value="{{$description}}"cols="30" rows="9"></textarea>
+                                                <textarea type="text" id="descriptionProfile" name="description" cols="30" rows="9">{{$description}}</textarea>
                                             </div>
                                             <div class="in-content-2">
                                             <h3>Last Name</h3>
