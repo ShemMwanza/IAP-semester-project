@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{url('css/craft.css')}}" type="text/css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -14,7 +16,8 @@
 
     <article>
         <div class="body">
-        <form id="addPhoto" action="" method="POST">
+         <form id="addPhoto" action="" method="POST" enctype="multipart/form-data">
+          @csrf  
         <h1>Craft</h1>
         <h2>Add Photo</h2>
         <input type="file" id="photo" name="photo">
@@ -22,6 +25,8 @@
         <h2>Add Caption</h2>
         <input type="text" id="caption" name="caption"><br><br>
         <button type="submit"id="upload">Upload</button>
+        <p class="success"  id="success"></p>
+        <p class="error"  id="error"></p>
         </form>
         </div>
         
@@ -61,6 +66,6 @@
 </section>
 
 <script src="{{url('js/landing.js')}}"></script>
-
+<script src="{{ url('/js/script.js')}}"></script>
 </body>
 </html>
