@@ -136,12 +136,12 @@ class MainController extends Controller
     }
 
     function addCraft(Request $request){
-        // $request->validate([
-        //     // "art_type"=>"required",
-        //     "photo"=>"required",
-        //     "caption"=>"required|email",
-        //     ]
-        // );
+        $request->validate([
+            // "art_type"=>"required",
+            "photo"=>"required",
+            "caption"=>"required|email",
+            ]
+        );
 
         $craft_file = $request->file('photo');
         $lastId= Art::latest()->first();
