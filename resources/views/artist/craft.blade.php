@@ -18,7 +18,7 @@
         <h1>Craft</h1>
         <h2>Add Photo</h2>
         <input type="file" id="photo" name="photo">
-        <button type="button" id="gig_upload_file">Choose File</button><br><br>
+        <button type="button"  onclick='uploadCraft()' id="gig_upload_file">Choose File</button><br><br>
         <h2>Add Caption</h2>
         <input type="text" id="caption" name="caption"><br><br>
         <button type="submit"id="upload">Upload</button>
@@ -60,7 +60,7 @@
     </article>
 </section>
 
-
+<script src="{{url('js/landing.js')}}"></script>
 
 </body>
 </html>

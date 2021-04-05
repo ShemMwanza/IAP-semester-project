@@ -186,7 +186,11 @@ window.onclick = function (event) {
     clearMessageField();
 }
 
+//For Craft uploading button
+function uploadCraft() {
+    document.getElementById("photo").click();
 
+}
 //For Craft changing button
 function changeCraft() {
     document.getElementById("craft_file").click();
