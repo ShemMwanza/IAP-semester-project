@@ -34,3 +34,5 @@ Route::post('artist/addCraft',[MainController::class,'addCraft']);
 Route::post('artist/editCraft',[MainController::class,'editCraft']);
 Route::post('artist/craftUpdate',[MainController::class,'craftUpdate']);
 Route::post('artist/deleteCraft',[MainController::class,'deleteCraft']);
+Route::get('artist/searchArtist',[MainController::class,'searchArtist']);
+Route::get('artist/findArtist', [MainController::class,'getFindArtistPage']);
