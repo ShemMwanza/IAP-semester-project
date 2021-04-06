@@ -243,7 +243,7 @@ class MainController extends Controller
             return response()->json('Oops, Something went wrong');
         }       
     }
- function editCraft(Request $request)
+    function editCraft(Request $request)
     {       
         //return response()->json(['data'=>$craftId]);
         $craftId=$request->craft_id;
@@ -310,7 +310,7 @@ class MainController extends Controller
     }      
 
     }
-}
+
     /*routing to the find artist page */
     function getFindArtistPage()
     {
