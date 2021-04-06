@@ -64,7 +64,7 @@
             <p class="error"  id="loginError">{{Session::get('loginError')}}</p>
             @endif
             <button type="submit">Sign In</button>
-            <button id="forgotP">Trouble logging in? Click here for reset</button>
+            <button id="forgotP" type="button">Trouble logging in? Click here for reset</button>
             <p id="Message" style='color:red; margin-left: 39px;'></p>
         </form>
     </div>

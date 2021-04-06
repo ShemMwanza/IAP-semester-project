@@ -165,10 +165,7 @@ class MainController extends Controller
     }
     /*routing to the dashboard*/
     function dashboard(){
-        $data=[
-            'loggedUserInfo'=>User::where('id','=',session('userId'))->first(),
-            'usersCraftInfo'=>User::where('id','=',session('userId'))
-             ];
+        $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
         return view('artist.dashboard',$data);
     }
 
@@ -189,7 +186,10 @@ class MainController extends Controller
     /*routing to the Landing page */
     function getLandingPage()
     {
-        $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
+        $data=[
+            'loggedUserInfo'=>User::where('id','=',session('userId'))->first(),
+            'usersCraftInfo'=>Art::where('user_id','=',session('userId'))->get()
+             ];
         return view('artist.landing',$data);
     }
     /*routing to the craft uploading page */
@@ -238,7 +238,75 @@ class MainController extends Controller
         if ($save) {
             return response()->json(['success'=>"Craft Uploaded Successfully"]);
         }else {
-            return response()->json('Oops, Something went wrong');
+            return response()->json(['error'=>"Oops, Something went wrong"]);
         }       
+    }
+    
+    function editCraft(Request $request)
+    {       
+        //return response()->json(['data'=>$craftId]);
+        $craftId=$request->craft_id;
+        $craft= Art::where("id","=",$craftId)->first();
+        return response()->json(
+            ["artType" => $craft->art_type,
+            "artCaption" =>$craft->art_caption,
+            "artPath" =>$craft->art_path 
+            ]
+            , 200);
+    }
+
+    function craftUpdate(Request $request)
+    {
+
+        $request->validate([
+            "craft_type"=>"required",
+            "craft_description"=>"required"
+            ]
+        );
+        $craftId=$request->craft_id;
+        $craftType=$request->craft_type;
+        $craftFile=$request->file('craft_file');
+        $craftDescription= $request->craft_description;
+       
+        if ($craftFile!=null) {
+            //File storing logic
+            $fileExtension= $craftFile->extension();
+            $craftFileName='craft'.session('userId').$craftId.'.'.$fileExtension;
+            $craftUploadPath = $craftFile->storeAs(
+                'public/Image', ($craftFileName)
+            );
+            
+            $art= Art::where('id',$craftId)->update([
+                'art_type'=>$craftType,
+                'art_caption'=>$craftDescription,
+                'art_path'=>$craftFileName
+            ]);
+            if ($art) {
+                return response()->json(['success'=>"Craft Updated Successfully"]);
+            }else {
+                return response()->json(['error'=>"Oops, Something went wrong"]);
+            }       
+        }else {
+            $art= Art::where('id',$craftId)->update([
+                'art_type'=>$craftType,
+                'art_caption'=>$craftDescription,
+            ]);
+            if ($art) {
+                return response()->json(['success'=>"Craft Updated Successfully"]);
+            }else {
+                return response()->json(['error'=>"Oops, Something went wrong"]);
+            }       
+        }
+    }
+    function deleteCraft(Request $request)
+    {
+       $craftId=$request->craftId;
+       $craft= Art::where("id","=",$craftId)->delete();
+    if ($craft) {
+        return response()->json(['success'=>"Craft deleted Successfully"]);
+    }else {
+        return response()->json(['error'=>"Oops, Something went wrong"]);
+    }      
+
     }
 }
