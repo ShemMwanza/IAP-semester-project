@@ -31,3 +31,6 @@ Route::get('artist/logout',[MainController::class,'logout']);
 Route::post('artist/updateProfile',[MainController::class,'updateProfile']);
 Route::post('artist/changePassword',[MainController::class,'changePassword']);
 Route::post('artist/addCraft',[MainController::class,'addCraft']);
+Route::post('artist/editCraft',[MainController::class,'editCraft']);
+Route::post('artist/craftUpdate',[MainController::class,'craftUpdate']);
+Route::post('artist/deleteCraft',[MainController::class,'deleteCraft']);

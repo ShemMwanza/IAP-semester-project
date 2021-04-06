@@ -67,12 +67,12 @@ window.onclick = function (event) {
 var imageModal = document.getElementById("imageModal");
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById("img");
+// var img = document.getElementById("img");
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
-img.onclick = function () {
+function zoomImage (element) {
     imageModal.style.display = "block";
-    modalImg.src = this.src;
+    modalImg.src = element.src;
 }
 
 // Get the <span> element that closes the modal
@@ -171,8 +171,31 @@ var modal2 = document.getElementById("editModal");
 var btn1 = document.getElementById("editCraft");
 var span2 = document.getElementsByClassName("closeEvent")[0];
 
-btn1.onclick = function () {
-modal2.style.display = "block";
+
+function editCraft(id) {
+    console.log("Id: "+id);
+    formData= new FormData();
+    formData.append("craft_id",id);
+    $.ajax({
+        url: 'editCraft',
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data) {
+            console.log(data);
+            document.getElementById("craft_type").value=data['artType'];
+            document.getElementById("craft_description").value=data['artCaption'];
+            document.getElementById("craft_id").value=id;
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+    modal2.style.display = "block";
 
 }
 span2.onclick = function () {
@@ -194,10 +217,7 @@ function changeCraft() {
     document.getElementById("craft_file").click();
 
 }
-//For event file changing button
-function changeEvent() {
-    document.getElementById("event_file").click();
-}
+
 
 
 $(document).ready(function () {
@@ -206,23 +226,36 @@ $(document).ready(function () {
     });
 });
 
-function craftDelete() {
+function deleteCraft() {
     if (confirm("Do you really want to delete this craft?")) {
         let craftId = document.querySelector("#craft_id").value;
-        let xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == "Successful") {
-                    $("#eventEdit_success").text("Craft Deleted Successfully");
-                } else {
-                    $("#eventEdit_error").text(this.responseText);
+        let data = {"craftId":craftId};
+        let formData= new FormData();
+        formData.append("craftId",craftId);
+        $.ajax({
+            url: 'deleteCraft',
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                for (const type in data) {
+                    if (type=="success") {
+                        $("#updateCraft_success").text(data[type]);
+                        break;
+                    } else {
+                        $("#updateCraft_error").text(data[type]);
+                        break;
+                    }
                 }
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
             }
-        };
-        xmlhttp.open("POST", "Logic/logic2.php", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        var data = "craft_id=" + craftId + "&type=deleteCraft";
-        xmlhttp.send(data);
+        });
     }
 }
 
@@ -323,33 +356,43 @@ $(document).ready(function () {
 
 // Editing craft
 $(document).ready(function () {
-    $('#craftEdit').submit(function (event) {
+    $('#craftUpdate').submit(function (event) {
         event.preventDefault();
         clearMessageField();
         let formData = new FormData($(this)[0]);
-        formData.append("type", "updateCraft");
         let formEmpty = false;
         for (var value of formData.entries()) {
             formEmpty = (value[1] == "") ? true : false;
         }
         if (!formEmpty) {
             $.ajax({
-                url: 'Logic/logic2.php',
+                url: 'craftUpdate',
                 enctype: 'multipart/form-data',
                 data: formData,
                 processData: false,
                 contentType: false,
                 type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                 success: function (data) {
-                    if (data == "Successful") {
-                        $("#craftEdit_success").text("Craft Updated Successfully");
-                    } else {
-                        $("#craftEdit_error").text(data);
+                    for (const type in data) {
+                        if (type=="success") {
+                            $("#updateCraft_success").text("Craft Updated Successfully");
+                            break;
+                        }
+                        if (type=="error") {
+                            $("#updateCraft_error").text(data[type]);
+                            break;
+                        }  
                     }
                 },
                 error: function (e) {
-                    alert(e.responseText);
-                    console.log("ERROR : ", e);
+                    let errors= e['responseJSON']['errors'];
+                for (const type in errors) {
+                     $("#updateCraft_error").text(errors[type]);
+                     break;
+                }
                 }
             });
         } else {
