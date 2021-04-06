@@ -19,17 +19,18 @@
 
 <body>
     <section>
-    <!-- {{
+    {{
         $firstName=$loggedUserInfo['first_name'],
         $lastName=$loggedUserInfo['last_name'],
         $fullName= $firstName." ".$lastName,
         $description=$loggedUserInfo['description'],
         $talent=($loggedUserInfo['talent']),
-        $email=($loggedUserInfo['email'])
-    }} -->
+        $email=($loggedUserInfo['email']),
+        $profilePhoto=($loggedUserInfo['profile_photo'])
+    }}
         <article>
             <div class="profile">
-                <img src="{{url('.idea\Pictures\man.jpeg')}}" alt="man">
+                <img src="{{asset('/storage/Image/'.$profilePhoto)}}" alt="man">
                 <div class="profile-1">
                     <div class="profile-2">
                     <h1>{{$fullName}}</h1>
@@ -65,7 +66,7 @@
                                         <br>
 
                                         <div class="profile1">
-                                            <img id="pic"  alt="man" src="{{url('.idea\Pictures\man.jpeg')}}"/>
+                                            <img id="pic"  alt="man" src="{{asset('/storage/Image/'.$profilePhoto)}}"/>
                                             <div class="profile-1">
                                                 <div class="profile-2-1">
                                                     <h1>{{$fullName}}</h1>
@@ -84,7 +85,7 @@
                                                 <h3>Email</h3>
                                                 <input type="text" id="emailProfile" name="email" value="{{$email}}">
                                                 <h3>Description</h3>
-                                                <textarea type="text" id="descriptionProfile" name="description" value="{{$description}}"cols="30" rows="9"></textarea>
+                                                <textarea type="text" id="descriptionProfile" name="description" cols="30" rows="9">{{$description}}</textarea>
                                             </div>
                                             <div class="in-content-2">
                                             <h3>Last Name</h3>
@@ -116,7 +117,7 @@
                                 <div class="containerContent" id="containerContent">
                                     <span class="closePasswords">&times;</span>
                                     <div class="form-container sign-up-container">
-                                        <form id="formCPassword" action="#">
+                                        <form id="formCPassword" action="changePassword" method="post">
                                             <h1 id="title">Change Password</h1>
                                 
                                             <label>
@@ -124,7 +125,8 @@
                                                 <input id="nPassword" name="nPassword" type="password" placeholder="New Password" />
                                                 <input id="confirmPassword" name="confirmPassword" placeholder="Confirm New Password" type="password" />
                                             </label>
-                                
+                                            <p id="changePasswordSuccess" class="success"></p>
+                                                <p id="changePasswordError" class="error"></p>
                                             <button type="submit" name="cPassword" id="cPassword">Confirm</button>
                                             <p id="Message" style='color:red; margin-left: 39px;'></p>
                                         </form>
@@ -138,7 +140,7 @@
                         </div>
 
                     </div>
-                    <p>A young enthusiastic kenyan-born musician with the biggest passion for photos</p>
+                    <p>{{$description}}</p>
                 </div>
                 <br>
 
@@ -274,7 +276,7 @@
                                             <h3>Change Name</h3>
                                             <input type='text' id='name' name='Name'>
                                             <h3>Change Photo</h3>
-                                            <input type='file' id='photo' name='photo'>
+                                            <input type='file' id='eventPhoto' name='eventPhoto'>
                                             <h3>Change Caption</h3>
                                             <input type='text' id='description' name='description'>
                                             <br>

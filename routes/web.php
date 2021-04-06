@@ -29,4 +29,5 @@ Route::post('/auth/register',[MainController::class,'register']);
 Route::get('artist/dashboard',[MainController::class,'dashboard']);
 Route::get('artist/logout',[MainController::class,'logout']);
 Route::post('artist/updateProfile',[MainController::class,'updateProfile']);
-Route::post('artist/craft',[MainController::class,'addCraft'])->name('craft.add');
+Route::post('artist/changePassword',[MainController::class,'changePassword']);
+Route::post('artist/addCraft',[MainController::class,'addCraft']);

@@ -32,6 +32,14 @@ article h2{
     font-size: 18px;
 
 }
+#type{
+    width: 80%;
+    outline: #404;
+    border: 1px solid #348DE6;
+    color: #707070;
+    font-size: 18px;
+
+}
 #upload{
     color: #ffffff;
     font-size: 16px;
@@ -113,3 +121,9 @@ article h2{
 }
 
 
+p.success{
+    color: green;
+   }
+   p.error{
+     color: red;
+   }

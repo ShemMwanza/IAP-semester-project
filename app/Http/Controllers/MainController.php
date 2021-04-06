@@ -99,15 +99,21 @@ class MainController extends Controller
         $lastData= User::latest()->first();
         $lastId=$lastData->id;
         $email=$request->email;
+       
+        // dd($fileExtension);
         if ($photo!=null) {
+            $fileExtension= $photo->extension();
+            $fileName='profilePhoto'.$lastId.'.'.$fileExtension;
             $profilePhotoPath = $photo->storeAs(
-                'file', ('profilePhoto'.$lastId)
+                'public/Image', ($fileName)
             );
+            // unlink()
+            //$profilePhotoPath=$photo->store('file');
             $user= User::where('id',session('userId'))->update([
                 'first_name'=>$firstName,
                 'last_name'=>$lastName,
                 'description'=>$description,
-                'profile_photo'=>$profilePhotoPath,
+                'profile_photo'=>$fileName,
                 'talent'=>$talent,
                 'email'=>$email
             ]) ;
@@ -131,8 +137,6 @@ class MainController extends Controller
             }
         }
 
-        // $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
-        // return view('artist.dashboard',$data);
     }
 
     /*Chnage Password */
@@ -159,11 +163,12 @@ class MainController extends Controller
         }
         
     }
-
-
     /*routing to the dashboard*/
     function dashboard(){
-        $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
+        $data=[
+            'loggedUserInfo'=>User::where('id','=',session('userId'))->first(),
+            'usersCraftInfo'=>User::where('id','=',session('userId'))
+             ];
         return view('artist.dashboard',$data);
     }
 
@@ -196,5 +201,44 @@ class MainController extends Controller
     function getDashboardPage()
     {
         return view('artist.dashboard');
+    }
+    function addCraft(Request $request){
+       
+        //validating logic
+        $request->validate([
+            "photo"=>"required",
+            "caption"=>"required",
+            ]
+        );
+
+        $craft_file = $request->file('photo');
+        $lastId= (Art::latest()->first()); //last craft Id
+        if($lastId == null){
+            $lastId = 1;
+        }else {
+            $lastId= ($lastId->id+1);
+        }
+
+        //File storing logic
+        $fileExtension= $craft_file->extension();
+        $craftFileName='craft'.session('userId').$lastId.'.'.$fileExtension;
+        $craftUploadPath = $craft_file->storeAs(
+            'public/Image', ($craftFileName)
+        );
+        
+        // database saving logic
+        $art = new Art;
+        $art->user_id=session('userId');
+        $art->art_type=$request->type; 
+        $art->art_caption=$request->caption; 
+        $art->art_path=$craftFileName;
+        $save = $art->save();         
+
+        //confirmation message logic
+        if ($save) {
+            return response()->json(['success'=>"Craft Uploaded Successfully"]);
+        }else {
+            return response()->json('Oops, Something went wrong');
+        }       
     }
 }
