@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Art;
 class MainController extends Controller
 {
     protected $password;
@@ -136,9 +137,8 @@ class MainController extends Controller
             }
         }
 
-        // $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
-        // return view('artist.dashboard',$data);
     }
+
     /*Chnage Password */
     function changePassword(Request $request){
         $currentPassword= $request->current;
@@ -148,7 +148,7 @@ class MainController extends Controller
         if ($newPassword!=$confirmNewPassword) {
             return response()->json(["error"=>"Password Mismatch"], 200);
         }else {
-            if(Hash::check($currentPassword, $user->password) ){
+            if(!Hash::check($currentPassword, $user->password) ){
                 return response()->json(['error'=>'wrong current password'], 200);
             }else {
                 $update= User::where('id','=',session('userId'))->update([
@@ -165,7 +165,10 @@ class MainController extends Controller
     }
     /*routing to the dashboard*/
     function dashboard(){
-        $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
+        $data=[
+            'loggedUserInfo'=>User::where('id','=',session('userId'))->first(),
+            'usersCraftInfo'=>User::where('id','=',session('userId'))
+             ];
         return view('artist.dashboard',$data);
     }
 
@@ -198,5 +201,44 @@ class MainController extends Controller
     function getDashboardPage()
     {
         return view('artist.dashboard');
+    }
+    function addCraft(Request $request){
+       
+        //validating logic
+        $request->validate([
+            "photo"=>"required",
+            "caption"=>"required",
+            ]
+        );
+
+        $craft_file = $request->file('photo');
+        $lastId= (Art::latest()->first()); //last craft Id
+        if($lastId == null){
+            $lastId = 1;
+        }else {
+            $lastId= ($lastId->id+1);
+        }
+
+        //File storing logic
+        $fileExtension= $craft_file->extension();
+        $craftFileName='craft'.session('userId').$lastId.'.'.$fileExtension;
+        $craftUploadPath = $craft_file->storeAs(
+            'public/Image', ($craftFileName)
+        );
+        
+        // database saving logic
+        $art = new Art;
+        $art->user_id=session('userId');
+        $art->art_type=$request->type; 
+        $art->art_caption=$request->caption; 
+        $art->art_path=$craftFileName;
+        $save = $art->save();         
+
+        //confirmation message logic
+        if ($save) {
+            return response()->json(['success'=>"Craft Uploaded Successfully"]);
+        }else {
+            return response()->json('Oops, Something went wrong');
+        }       
     }
 }

@@ -19,15 +19,15 @@ $(document).ready(function () {
     var btnSettings = document.getElementById("editProfile");
 
     var spanSettings = document.getElementsByClassName("closeSettings")[0];
-
-    btnSettings.onclick = function () {
-      modalSettings.style.display = "block";
-
+    if (btnSettings!=null) {
+        btnSettings.onclick = function () {
+            modalSettings.style.display = "block";
+          }             
     }
-
-
-    spanSettings.onclick = function () {
-      modalSettings.style.display = "none";
+    if (spanSettings!=null) {
+        spanSettings.onclick = function () {
+            modalSettings.style.display = "none";
+          }   
     }
 
 
@@ -45,23 +45,24 @@ var btnContainer = document.getElementById("scPassword");
 
 var spanContainer = document.getElementsByClassName("closePasswords")[0];
 
-btnContainer.onclick = function () {
-container.style.display = "block";
+if (btnContainer!=null) {
+    btnContainer.onclick = function () {
+        container.style.display = "block";
+        }    
+    }
 
-}
-
-spanContainer.onclick = function () {
-    clearMessageField();
-    container.style.display = "none";
-}
+if (spanContainer!=null) {
+    spanContainer.onclick = function () {
+        clearMessageField();
+        container.style.display = "none";
+        }
+    }
 
 window.onclick = function (event) {
     if (event.target == container) {
         container.style.display = "none";
     }
 }
-
-
 
 var imageModal = document.getElementById("imageModal");
 
@@ -186,11 +187,8 @@ window.onclick = function (event) {
     clearMessageField();
 }
 
-//For Craft uploading button
-function uploadCraft() {
-    document.getElementById("photo").click();
 
-}
+
 //For Craft changing button
 function changeCraft() {
     document.getElementById("craft_file").click();
@@ -228,6 +226,7 @@ function craftDelete() {
     }
 }
 
+// Changing password using AJAX
 $(document).ready(function () {
     $("#formCPassword").submit(function (event) {
         console.log("called");
@@ -235,6 +234,8 @@ $(document).ready(function () {
         clearMessageField();
         let formData = new FormData($(this)[0]);
         let formEmpty = false;
+
+        //Checking if there is any empty field 
         for (var value of formData.entries()) {
             formEmpty = (value[1] == "") ? true : false;
             if (formEmpty) {
@@ -242,8 +243,8 @@ $(document).ready(function () {
             }
         }
         if (!formEmpty) {
+            //checking if the new password and the confirmation password are the same
             if (formData.get('nPassword')==formData.get('confirmPassword')) {
-                console.log("called2");
                 $.ajax({
                     url: 'changePassword',
                     enctype: 'multipart/form-data',
@@ -255,7 +256,6 @@ $(document).ready(function () {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (data) {
-                        //data= JSON.parse(data);
                         for (const type in data) {
                             if (type=="success") {
                                 $("#changePasswordSuccess").text(data[type]);
@@ -278,13 +278,14 @@ $(document).ready(function () {
     });
 });
 
-//chnage Password
+//Updating ptofile
 $(document).ready(function () {
     $("#updateProfile").submit(function (event) {
         event.preventDefault();
         clearMessageField();
         let formData = new FormData($(this)[0]);
         let formEmpty = false;
+         //Checking if there is any empty field 
         for (var value of formData.entries()) {
             formEmpty = (value[1] == "") ? true : false;
             if (formEmpty) {
@@ -320,7 +321,7 @@ $(document).ready(function () {
     });
 });
 
-// 
+// Editing craft
 $(document).ready(function () {
     $('#craftEdit').submit(function (event) {
         event.preventDefault();
@@ -360,8 +361,6 @@ $(document).ready(function () {
 document.getElementById("image_upload_file").onclick= function() {
     document.getElementById('photo').click();
 }
-
-
 
 
 

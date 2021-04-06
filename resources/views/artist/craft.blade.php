@@ -16,17 +16,19 @@
 
     <article>
         <div class="body">
-         <form id="addPhoto" action="" method="POST" enctype="multipart/form-data">
+         <form id="addCraft" method="POST" enctype="multipart/form-data">
           @csrf  
         <h1>Craft</h1>
         <h2>Add Photo</h2>
         <input type="file" id="photo" name="photo">
         <button type="button"  onclick='uploadCraft()' id="gig_upload_file">Choose File</button><br><br>
+        <h2>Add Type</h2>
+        <input type="text" id="type" name="type"><br><br>
         <h2>Add Caption</h2>
-        <input type="text" id="caption" name="caption"><br><br>
+        <textarea type="text" id="caption" name="caption"></textarea><br><br>
         <button type="submit"id="upload">Upload</button>
-        <p class="success"  id="success"></p>
-        <p class="error"  id="error"></p>
+        <p class="success"  id="craftUploadSuccess"></p>
+        <p class="error"  id="craftUploadError"></p>
         </form>
         </div>
         
@@ -65,7 +67,6 @@
     </article>
 </section>
 
-<script src="{{url('js/landing.js')}}"></script>
-<script src="{{ url('/js/script.js')}}"></script>
+<script src="{{url('js/craft.js')}}"></script>
 </body>
 </html>

@@ -140,7 +140,7 @@
                         </div>
 
                     </div>
-                    <p>A young enthusiastic kenyan-born musician with the biggest passion for photos</p>
+                    <p>{{$description}}</p>
                 </div>
                 <br>
 
@@ -276,7 +276,7 @@
                                             <h3>Change Name</h3>
                                             <input type='text' id='name' name='Name'>
                                             <h3>Change Photo</h3>
-                                            <input type='file' id='photo' name='photo'>
+                                            <input type='file' id='eventPhoto' name='eventPhoto'>
                                             <h3>Change Caption</h3>
                                             <input type='text' id='description' name='description'>
                                             <br>
