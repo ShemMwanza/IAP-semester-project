@@ -26,7 +26,7 @@
         $description=$loggedUserInfo['description'],
         $talent=($loggedUserInfo['talent']),
         $email=($loggedUserInfo['email']),
-        $profilePhoto=($loggedUserInfo['profile_photo'])
+        $profilePhoto=($loggedUserInfo['profile_photo']),
         
     }} -->
         <article>
