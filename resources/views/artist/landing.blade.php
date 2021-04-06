@@ -27,6 +27,7 @@
         $talent=($loggedUserInfo['talent']),
         $email=($loggedUserInfo['email']),
         $profilePhoto=($loggedUserInfo['profile_photo'])
+        
     }} -->
         <article>
             <div class="profile">
