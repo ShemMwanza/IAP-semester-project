@@ -19,7 +19,7 @@
 
 <body>
     <section>
-    {{
+    <! --{{
         $firstName=$loggedUserInfo['first_name'],
         $lastName=$loggedUserInfo['last_name'],
         $fullName= $firstName." ".$lastName,
@@ -28,7 +28,7 @@
         $email=($loggedUserInfo['email']),
         $profilePhoto=($loggedUserInfo['profile_photo']),
         
-    }}
+    }} -->
         <article>
             <div class="profile">
                 <img src="{{asset('/storage/Image/'.$profilePhoto)}}" alt="man">
