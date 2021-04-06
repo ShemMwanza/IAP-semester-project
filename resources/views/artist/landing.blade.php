@@ -19,7 +19,7 @@
 
 <body>
     <section>
-    <! --{{
+    <!-- {{
         $firstName=$loggedUserInfo['first_name'],
         $lastName=$loggedUserInfo['last_name'],
         $fullName= $firstName." ".$lastName,
