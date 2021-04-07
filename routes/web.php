@@ -39,3 +39,4 @@ Route::get('auth/reset_password',[MainController::class,'getResetPasswordPage'])
 Route::post('auth/reset_password',[MainController::class,'resetPassword'])->middleware('guest')->name('password.reset');
 Route::get('artist/searchArtist',[MainController::class,'searchArtist']);
 Route::get('artist/findArtist', [MainController::class,'getFindArtistPage']);
+Route::get('artist/viewArtist/{id}', [MainController::class,'viewArtist']);

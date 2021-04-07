@@ -34,7 +34,7 @@
         <div id="search_results" class="body">
             @if($users != null)
             @foreach($users as $user)
-            <div class='profile' onclick='checkProfile()'>
+            <div class='profile' onclick='checkProfile({{$user->id}})'>
                 <div class='profile_img'>
                     <img class='img' src="{{asset('/storage/Image/'.$user->profile_photo)}}" alt='Profile_photo'>
                 </div>

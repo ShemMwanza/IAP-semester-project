@@ -79,7 +79,7 @@ class MainController extends Controller
     function logout(){
         if (session()->has('userId')) {
             session()->pull('userId');
-            return redirect('auth/login_&_register');
+            return redirect('/');
         }
     }
 
@@ -366,11 +366,16 @@ class MainController extends Controller
     }
 
     function searchArtist(Request $request){
-        $search = $request->search;        
-        $users = DB::table('users')->select('id', 'first_name', 'last_name', 'description', 'profile_photo')->where("talent","LIKE","%{$search}%")->orWhere("description","LIKE","%{$search}%")->get();        
+        $search = $request->search;
+        if($search == ""){
+            $users = DB::table('users')->select('id', 'first_name', 'last_name', 'description', 'profile_photo')->get();
+        }else{
+            $users = DB::table('users')->select('id', 'first_name', 'last_name', 'description', 'profile_photo')->where("talent","LIKE","%{$search}%")->orWhere("description","LIKE","%{$search}%")->get(); 
+        }       
+               
         $output = array();
         foreach ($users as $user) {
-            array_push($output, "<div class='profile' onclick='checkProfile()'>
+            array_push($output, "<div class='profile' onclick='checkProfile($user->id)'>
                             <div class='profile_img'>
                                 <img class='img' src='/storage/Image/$user->profile_photo' alt='Profile_photo'>
                             </div>
@@ -387,5 +392,15 @@ class MainController extends Controller
         }
         return response()->json($output);
        
+    }
+
+    function viewArtist(Request $request){
+        $id = $request->id;
+        $data=[
+            'artistInfo'=>User::where('id','=',$id)->first(),
+            'artistCraftInfo'=>Art::where('user_id','=',$id)->get()
+             ];
+
+        return view('artist.viewArtist', $data);
     }
 }
