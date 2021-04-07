@@ -202,7 +202,7 @@ class MainController extends Controller
     function getDashboardPage()
     {
         return view('artist.dashboard');
-    }
+    }    
     function addCraft(Request $request){
        
         //validating logic
@@ -310,7 +310,7 @@ class MainController extends Controller
     }      
 
     }
-    
+  
     /*routing to the find artist page */
     function getFindArtistPage()
     {
@@ -339,6 +339,6 @@ class MainController extends Controller
                         </div>");
         }
         return response()->json($output);
-        
+       
     }
 }
