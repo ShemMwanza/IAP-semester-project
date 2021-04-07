@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Art;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 class MainController extends Controller
 {
     protected $password;
@@ -174,10 +177,54 @@ class MainController extends Controller
         return view('auth.login_&_register');
     }
     /*routing to the reset password page*/
-    function getResetPasswordPage()
+    function getForgotPasswordPage()
     {
-        return view('auth.r_password');
+        return view('auth.forgot_password');
     }
+    function forgotPassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+    
+        return $status === Password::RESET_LINK_SENT
+                    ? back()->with(['status' => __($status)])
+                    : back()->withErrors(['email' => __($status)]);
+    
+    }
+    function getResetPasswordPage(Request $request) {
+        return view('auth.reset_password', ['token' => $request->token,'email'=>$request->email]);
+        // return view('auth.reset_password');
+    } 
+
+    function resetPassword(Request $request) {
+        // return view('auth.reset_password', ['token' => $token]);
+        // // return view('auth.reset_password');
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:5|confirmed',
+        ]);
+    
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) use ($request) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+    
+                $user->save();
+    
+                event(new PasswordReset($user));
+            }
+        );
+       // return response()->json(["data"=>$status], 200);
+        return $status == Password::PASSWORD_RESET
+                    ? redirect()->route('reset_password')->with('status', __($status))
+                    : back()->withErrors(['email' => [__($status)]]);
+    } 
     /*routing to the beautiful index page -_-*/
     function getIndexPage()
     {
