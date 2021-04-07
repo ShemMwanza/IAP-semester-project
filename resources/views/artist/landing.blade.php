@@ -19,16 +19,16 @@
 
 <body>
     <section>
-    <!-- {{
-        $firstName=$loggedUserInfo['first_name'],
-        $lastName=$loggedUserInfo['last_name'],
-        $fullName= $firstName." ".$lastName,
-        $description=$loggedUserInfo['description'],
-        $talent=($loggedUserInfo['talent']),
-        $email=($loggedUserInfo['email']),
-        $profilePhoto=($loggedUserInfo['profile_photo']),
+    @php
+        $firstName=$loggedUserInfo['first_name'];
+        $lastName=$loggedUserInfo['last_name'];
+        $fullName= $firstName." ".$lastName;
+        $description=$loggedUserInfo['description'];
+        $talent=($loggedUserInfo['talent']);
+        $email=($loggedUserInfo['email']);
+        $profilePhoto=($loggedUserInfo['profile_photo']);
         
-    }} -->
+    @endphp
         <article>
             <div class="profile">
                 <img src="{{asset('/storage/Image/'.$profilePhoto)}}" alt="man">

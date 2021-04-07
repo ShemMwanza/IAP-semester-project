@@ -1,3 +1,7 @@
+document.getElementById("logo").onclick = function () {
+      location.href = "/";
+    };
+    
 function clearMessageField() {
     $(".error").text("");
     $(".success").text("");

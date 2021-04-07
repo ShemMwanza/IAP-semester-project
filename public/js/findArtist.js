@@ -1,18 +1,13 @@
 document.getElementById("logo").onclick = function () {
-      location.href = "index.html";
+      location.href = "/";
     };
     
-document.getElementById("button_search").onclick=function() {
-    let search= document.querySelector("input[name = 'search']").value;
-    if (search!="") {
-      location.href="findArtist.php?search="+search;
-    }else{
-      location.href="findArtist.php?search=all";
-    }
-  }
+
   function checkProfile(userId) {
-    window.location.href="artistProfile.php?profile_id="+userId;
+    console.log(userId);
+    location.href="viewArtist/"+userId;
   }
+
   $(document).ready(function(){
 		$("#search_text").keyup(function(event){
       console.log("called");
