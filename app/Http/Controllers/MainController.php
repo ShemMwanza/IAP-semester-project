@@ -166,10 +166,7 @@ class MainController extends Controller
     }
     /*routing to the dashboard*/
     function dashboard(){
-        $data=[
-            'loggedUserInfo'=>User::where('id','=',session('userId'))->first(),
-            'usersCraftInfo'=>User::where('id','=',session('userId'))
-             ];
+        $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
         return view('artist.dashboard',$data);
     }
 
@@ -190,7 +187,10 @@ class MainController extends Controller
     /*routing to the Landing page */
     function getLandingPage()
     {
-        $data=['loggedUserInfo'=>User::where('id','=',session('userId'))->first()];
+        $data=[
+            'loggedUserInfo'=>User::where('id','=',session('userId'))->first(),
+            'usersCraftInfo'=>Art::where('user_id','=',session('userId'))->get()
+             ];
         return view('artist.landing',$data);
     }
     /*routing to the craft uploading page */
@@ -340,6 +340,5 @@ class MainController extends Controller
         }
         return response()->json($output);
         
-    }
-        
+    }        
 }
