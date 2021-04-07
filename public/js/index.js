@@ -14,16 +14,16 @@
       location.href = "auth/login_&_register";
     };
 
-    // document.getElementById("recruitor").onclick = function () {
-    //   location.href = "recruitorRegister_Login.html";
-    // };
+    document.getElementById("Recruitor").onclick = function () {
+      location.href = "recruitorRegister_Login.html";
+    };
 
     // document.getElementById("artist").onclick = function () {
     //   location.href = "SignIn_&_Login.html";
     // };
 
     document.getElementById("addTalent").onclick = function () {
-      location.href = "SignIn_&_Login.html";
+      location.href = "auth/login_&_register";
     };
 
 
