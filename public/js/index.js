@@ -4,7 +4,7 @@
     };
 
     document.getElementById("findArtists").onclick = function () {
-      location.href = "artist/findArtist";
+      location.href = "findArtist.html";
     };
     document.getElementById("log").onclick = function () {
       location.href = "auth/login_&_register";

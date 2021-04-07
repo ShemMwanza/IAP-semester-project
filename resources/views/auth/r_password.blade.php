@@ -14,8 +14,7 @@
     <div class="container" id="container">
         <span class="closeReset" id="closeReset">&times;</span>
         <div class="form-container reset-container">
-            <form id="formReset" action="{{route('password.forgotPassword')}}" method="post">
-                @csrf
+            <form id="formReset" action="#">
                 <h1 id="title">Reset Password</h1>
                 
                 <label>
@@ -23,13 +22,7 @@
                 </label>
 
                 <button type="submit" name="rPassword" id="rPassword">Send link</button>
-                @if(Session::get('status'))
-                <p id="Message" class="success">{{Session::get('status')}}</p>
-                @endif
-                @if(Session::get('email'))
-                <p id="Message" style='color:red; margin-left: 39px;'>{{Session::get('email')}}</p>
-                @endif
-                
+                <p id="Message" style='color:red; margin-left: 39px;'></p>
             </form>
         </div> 
         <div id="text">
@@ -38,7 +31,7 @@
     </div>
 
 
-    <!-- <script src="{{url('/js/rPassword.js')}}"></script> -->
+    <script src="{{url('/js/rPassword.js')}}"></script>
     <script src="https://kit.fontawesome.com/d728f4e8e5.js" crossorigin="anonymous"></script>
 </body>
 

@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Art;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
-use DB;
 class MainController extends Controller
 {
     protected $password;
@@ -178,54 +174,10 @@ class MainController extends Controller
         return view('auth.login_&_register');
     }
     /*routing to the reset password page*/
-    function getForgotPasswordPage()
+    function getResetPasswordPage()
     {
-        return view('auth.forgot_password');
+        return view('auth.r_password');
     }
-    function forgotPassword(Request $request)
-    {
-        $request->validate(['email' => 'required|email']);
-
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-    
-        return $status === Password::RESET_LINK_SENT
-                    ? back()->with(['status' => __($status)])
-                    : back()->withErrors(['email' => __($status)]);
-    
-    }
-    function getResetPasswordPage(Request $request) {
-        return view('auth.reset_password', ['token' => $request->token,'email'=>$request->email]);
-        // return view('auth.reset_password');
-    } 
-
-    function resetPassword(Request $request) {
-        // return view('auth.reset_password', ['token' => $token]);
-        // // return view('auth.reset_password');
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:5|confirmed',
-        ]);
-    
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
-    
-                $user->save();
-    
-                event(new PasswordReset($user));
-            }
-        );
-       // return response()->json(["data"=>$status], 200);
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('reset_password')->with('status', __($status))
-                    : back()->withErrors(['email' => [__($status)]]);
-    } 
     /*routing to the beautiful index page -_-*/
     function getIndexPage()
     {
@@ -249,7 +201,7 @@ class MainController extends Controller
     function getDashboardPage()
     {
         return view('artist.dashboard');
-    }    
+    }
     function addCraft(Request $request){
        
         //validating logic
@@ -356,36 +308,5 @@ class MainController extends Controller
         return response()->json(['error'=>"Oops, Something went wrong"]);
     }      
 
-    }
-  
-    /*routing to the find artist page */
-    function getFindArtistPage()
-    {
-        $users = DB::table('users')->select('id', 'first_name', 'last_name', 'description', 'profile_photo')->get();
-        return view('artist.findArtist', ['users' => $users]);
-    }
-
-    function searchArtist(Request $request){
-        $search = $request->search;        
-        $users = DB::table('users')->select('id', 'first_name', 'last_name', 'description', 'profile_photo')->where("talent","LIKE","%{$search}%")->orWhere("description","LIKE","%{$search}%")->get();        
-        $output = array();
-        foreach ($users as $user) {
-            array_push($output, "<div class='profile' onclick='checkProfile()'>
-                            <div class='profile_img'>
-                                <img class='img' src='$user->profile_photo' alt='Profile_photo'>
-                            </div>
-                            <div class='profile_content'>
-                                <span class='profile_name'>
-                                    <p>$user->first_name  $user->last_name</p>
-                                </span>
-                                <span class='profile_info'>
-                                    <p>$user->description</p>
-                                </span>
-                            </div>
-
-                        </div>");
-        }
-        return response()->json($output);
-       
     }
 }
