@@ -15,7 +15,7 @@
             <nav  class="nav">
                 <div class="logo">
                     
-                   <img id="logo" title="Go Back" src=".idea\Pictures\emoticon-square-smiling-face-with-closed-eyes.svg" alt="LOGO"> 
+                   <img id="logo" title="Go Back" src="{{url('.idea\Pictures\emoticon-square-smiling-face-with-closed-eyes.svg')}}" alt="LOGO"> 
                 </div>
                 
                 <form class="search_form" id="search_form" method="get">
@@ -36,7 +36,7 @@
             @foreach($users as $user)
             <div class='profile' onclick='checkProfile()'>
                 <div class='profile_img'>
-                    <img class='img' src="{{url($user->profile_photo)}}" alt='Profile_photo'>
+                    <img class='img' src="{{asset('/storage/Image/'.$user->profile_photo)}}" alt='Profile_photo'>
                 </div>
                 <div class='profile_content'>
                     <span class='profile_name'>
