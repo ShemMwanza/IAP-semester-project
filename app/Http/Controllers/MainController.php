@@ -223,7 +223,7 @@ class MainController extends Controller
         );
        // return response()->json(["data"=>$status], 200);
         return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('reset_password')->with('status', __($status))
+                    ? redirect()->route('auth.loginAndRegister')->with('status', __($status))
                     : back()->withErrors(['email' => [__($status)]]);
     } 
     /*routing to the beautiful index page -_-*/
@@ -372,7 +372,7 @@ class MainController extends Controller
         foreach ($users as $user) {
             array_push($output, "<div class='profile' onclick='checkProfile()'>
                             <div class='profile_img'>
-                                <img class='img' src='$user->profile_photo' alt='Profile_photo'>
+                                <img class='img' src='/storage/Image/$user->profile_photo' alt='Profile_photo'>
                             </div>
                             <div class='profile_content'>
                                 <span class='profile_name'>

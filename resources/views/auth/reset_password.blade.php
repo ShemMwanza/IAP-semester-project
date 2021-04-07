@@ -25,18 +25,15 @@
                     <input id="email" name="email"  type="email" value="{{$email}}"/>
                 </label>
                 <p id="resetPasswordSuccess" class="success"></p>
-                <p id="resetPasswordError" class="error"></p>
+                <p id="resetPasswordError" class="error">@error('password'){{$message}} @enderror</p>
                 <button type="submit" name="resetPasswordButton" id="resetPasswordButton">Confirm</button>
                 <p id="Message" style='color:red; margin-left: 39px;'></p>
-                @if (session('status'))
-                <div>{{ session('status') }}</div>
-                @endif 
-                @if (session('email'))
-                <div>{{ session('email') }}</div>
-                @endif 
-                @if (session('password'))
-                <div>{{ session('password') }}</div>
-                @endif 
+                @if(Session::get('email'))
+                <p id="Message" class="success">{{Session::get('email')}}</p>
+                @endif
+                @if(Session::get('password'))
+                <p id="Message" style='color:red; margin-left: 39px;'>{{Session::get('password')}}</p>
+                @endif
             </form>
         </div>
     </div>

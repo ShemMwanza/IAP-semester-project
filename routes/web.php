@@ -19,7 +19,7 @@ use App\Http\Controllers\MainController;
 // Route::get('/register', function () {
 //     return view('register');
 // });
-Route::get('auth/login_&_register',[MainController::class,'display_login_register']);
+Route::get('auth/login_&_register',[MainController::class,'display_login_register'])->name('auth.loginAndRegister');
 Route::get('auth/forgot_password',[MainController::class,'getForgotPasswordPage'])->middleware('guest');
 Route::post('auth/forgot_password',[MainController::class,'forgotPassword'])->middleware('guest')->name('password.forgotPassword');
 Route::get('/',[MainController::class,'getIndexPage']);

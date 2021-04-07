@@ -63,6 +63,9 @@
             @if(Session::get('loginError'))
             <p class="error"  id="loginError">{{Session::get('loginError')}}</p>
             @endif
+            @if(Session::get('status'))
+            <p class="success"  id="success">{{Session::get('status')}}</p>
+            @endif
             <button type="submit">Sign In</button>
             <button id="forgotP" type="button">Trouble logging in? Click here for reset</button>
             <p id="Message" style='color:red; margin-left: 39px;'></p>
