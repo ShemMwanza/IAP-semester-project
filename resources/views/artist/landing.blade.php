@@ -150,83 +150,79 @@
 
 
 
-            <div class="body">
-                <div class="body_div">
-                    <div>
-                        <img id="img" class="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
-                    </div>
-                    <div>
+            <div class="body">                   
+                        @foreach ($usersCraftInfo as $craft)    
+                               <!-- $craftType=$craft->art_type, -->
+                                
+                            
+                        <div class="body_div">
+                            <div>
+                                <img id="img" class="img" onclick=zoomImage(this) src="{{asset('/storage/Image/'.$craft->art_path)}}" />
+                            </div>
+                            <div>
+                                <p class="ReadMore showlesscontent">{{$craft->art_caption}}</p>
+                            </div>
+                            <div>
 
-                        <p class="ReadMore showlesscontent">A burger a day keeps the tummy awake Lorem ipsum dolor sit
-                            amet consectetur adipisicing elit. Quidem dolorum, quaerat ratione nihil quo distinctio
-                            assumenda delectus at deserunt, ipsa eligendi magni. Ex asperiores optio,
-                            fugiat repellendus aspernatur rem consequatur. Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Iusto optio magni maxime, fuga neque nobis esse unde cumque porro minima
-                            excepturi, natus atque reprehenderit eaque pariatur ipsa facilis vel. Rem. Lorem ipsum dolor
-                            sit, amet consectetur adipisicing elit. Repudiandae debitis quisquam architecto culpa
-                            corporis fugit natus vitae incidunt quis?
-                            Exercitationem error dolorem, omnis quo voluptatem quasi modi illum assumenda nulla?</p>
-                    </div>
-                    <div>
-
-                        <button id='editCraft'>Edit</button>
-                        <div id='editModal' class='modal'>
-
-                            <div class='modal-content12'>
-                                <span class='closeEvent'>&times;</span>
-                                <br>
-                                <nav class='navbar12'>
-                                    <div class='logo'>
-                                        <h1>vivart</h1>
-                                    </div>
-
-                                    <div class='navbar__right12'>
-                                        <p>{{$fullName}}</p>
-
-                                        <img src="{{url('.idea\Pictures\profile.svg')}}" alt='Avatar' class='avatar1'>
-
-
-                                    </div>
-                                </nav>
-                                <br>
-
-
-                                <form id='craftEdit'>
-                                    <div class='in-content12'>
-
-
-                                        <div class='in-content-212'>
-                                            <h3>Change Name</h3>
-                                            <input type='text' id='craft_name' name='craft_name'>
-                                            <h3>Change Media File</h3>
-                                            <input type='file' id='craft_file' name='craft_file'>
-                                            <button type='button' class='file_selector'
-                                                onclick='changeCraft()'>Change</button>
-                                            <h3>Change Caption</h3>
-                                            <textarea type='text' id='craft_description'
-                                                name='craft_description'></textarea>
-                                            <input type='text' id='craft_id' name='craft_id'>
-                                            <br>
-                                            <p class='error' id='eventEdit_error'></p>
-                                            <p class='success' id='eventEdit_success'></p>
-                                            <br>
-                                            <br>
-                                            <div class="btns">
-                                                <button id='update1'>Update</button>
-                                                <br>
-                                                <button type='button' id='craft_delete'
-                                                    onclick='deleteEvent()'>Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                <button id="editCraft" onclick="editCraft({{$craft->id}})">Edit</button>
 
                             </div>
                         </div>
+                        @endforeach
+                
+                <div id='editModal' class='modal'>
 
-                    </div>
+                <div class='modal-content12'>
+                    <span class='closeEvent'>&times;</span>
+                    <br>
+                    <nav class='navbar12'>
+                        <div class='logo'>
+                            <h1>vivart</h1>
+                        </div>
+
+                        <div class='navbar__right12'>
+                            <p>{{$fullName}}</p>
+
+                            <img src="{{url('.idea\Pictures\profile.svg')}}" alt='Avatar' class='avatar1'>
+
+
+                        </div>
+                    </nav>
+                    <br>
+
+
+                    <form id='craftUpdate' method="post">
+                        <div class='in-content12'>
+
+
+                            <div class='in-content-212'>
+                                <h3>Change Type</h3>
+                                <input type='text' id='craft_type' name='craft_type'>
+                                <h3>Change Media File</h3>
+                                <input type='file' id='craft_file' name='craft_file'>
+                                <button type='button' class='file_selector'
+                                    onclick='changeCraft()'>Change</button>
+                                <h3>Change Caption</h3>
+                                <textarea type='text' id='craft_description'
+                                    name='craft_description'></textarea>
+                                <input type='text' id='craft_id' name='craft_id'>
+                                <br>
+                                <p class='error' id='updateCraft_error'></p>
+                                <p class='success' id='updateCraft_success'></p>
+                                <br>
+                                <div class="btns">
+                                    <button id='update1'>Update</button>
+                                    <br>
+                                    <button type='button' id='craft_delete'
+                                        onclick='deleteCraft()'>Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
+                </div>
+
 
                 <div class="body_div">
                     <div>
@@ -268,24 +264,6 @@
                                 </nav>
                                 <br>
 
-
-                                <form id='eventEdit'>
-                                    <div class='in-content12'>
-
-
-                                        <div class='in-content-212'>
-                                            <h3>Change Name</h3>
-                                            <input type='text' id='name' name='Name'>
-                                            <h3>Change Photo</h3>
-                                            <input type='file' id='eventPhoto' name='eventPhoto'>
-                                            <h3>Change Caption</h3>
-                                            <input type='text' id='description' name='description'>
-                                            <br>
-                                            <button id='update'>Update</button>
-                                        </div>
-                                    </div>
-                                </form>
-
                             </div>
                         </div>
 
@@ -293,92 +271,7 @@
 
                 </div>
 
-                <div class="body_div">
-                    <div>
-                        <img class="img" id="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
-                    </div>
-                    <div>
-                        <p>A burger a day keeps the tummy awake</p>
-                    </div>
-                    <div>
-                        <button>Edit</button>
-                    </div>
-
-                </div>
-
-                <div class="body_div">
-                    <div>
-                        <img class="img" id="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
-                    </div>
-                    <div>
-                        <p>A burger a day keeps the tummy awake</p>
-                    </div>
-                    <div>
-                        <button>Edit</button>
-                    </div>
-
-                </div>
-
-                <div class="body_div">
-                    <div>
-                        <img class="img" id="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
-                    </div>
-                    <div>
-                        <p>A burger a day keeps the tummy awake</p>
-                    </div>
-                    <div>
-                        <button>Edit</button>
-                    </div>
-
-                </div>
-                <div class="body_div">
-                    <div>
-                        <img class="img" id="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
-                    </div>
-                    <div>
-                        <p>A burger a day keeps the tummy awake</p>
-                    </div>
-                    <div>
-                        <button>Edit</button>
-                    </div>
-
-                </div>
-                <div class="body_div">
-                    <div>
-                        <img id="img" class="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
-                    </div>
-                    <div>
-                        <p>A burger a day keeps the tummy awake</p>
-                    </div>
-                    <div>
-                        <button>Edit</button>
-                    </div>
-
-                </div>
-                <div class="body_div">
-                    <div>
-                        <img id="img" class="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
-                    </div>
-                    <div>
-                        <p>A burger a day keeps the tummy awake</p>
-                    </div>
-                    <div>
-                        <button>Edit</button>
-                    </div>
-
-                </div>
-                <div class="body_div">
-                    <div>
-                        <img id="img" class="img" src="{{url('.idea\Pictures\burger.jpg')}}" />
-                    </div>
-                    <div>
-                        <p>A burger a day keeps the tummy awake</p>
-                    </div>
-                    <div>
-                        <button>Edit</button>
-                    </div>
-
-                </div>
+                
 
             </div>
 

@@ -239,7 +239,7 @@ class MainController extends Controller
         if ($save) {
             return response()->json(['success'=>"Craft Uploaded Successfully"]);
         }else {
-            return response()->json('Oops, Something went wrong');
+            return response()->json(['error'=>"Oops, Something went wrong"]);
         }       
     }
     
@@ -310,7 +310,7 @@ class MainController extends Controller
     }      
 
     }
-
+  
     /*routing to the find artist page */
     function getFindArtistPage()
     {
@@ -339,6 +339,6 @@ class MainController extends Controller
                         </div>");
         }
         return response()->json($output);
-        
-    }        
+       
+    }
 }

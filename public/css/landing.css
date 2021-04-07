@@ -197,7 +197,9 @@ section::after {
   font-size: 18px;
   margin-top: 3%;
 }
-
+ .craft_id{
+   display: none;;
+ }
   #descriptionProfile{
     width: 90%;
     height: 20vh;
