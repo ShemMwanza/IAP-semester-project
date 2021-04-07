@@ -35,10 +35,7 @@ Route::post('artist/addCraft',[MainController::class,'addCraft']);
 Route::post('artist/editCraft',[MainController::class,'editCraft']);
 Route::post('artist/craftUpdate',[MainController::class,'craftUpdate']);
 Route::post('artist/deleteCraft',[MainController::class,'deleteCraft']);
-<<<<<<< HEAD
 Route::get('auth/reset_password',[MainController::class,'getResetPasswordPage'])->middleware('guest');
 Route::post('auth/reset_password',[MainController::class,'resetPassword'])->middleware('guest')->name('password.reset');
-=======
 Route::get('artist/searchArtist',[MainController::class,'searchArtist']);
 Route::get('artist/findArtist', [MainController::class,'getFindArtistPage']);
->>>>>>> 9bc67998437dde58c89a7ead99e95ecf65968f83
