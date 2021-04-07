@@ -202,8 +202,7 @@ class MainController extends Controller
     function getDashboardPage()
     {
         return view('artist.dashboard');
-    }
-    
+    }    
     function addCraft(Request $request){
        
         //validating logic
@@ -243,6 +242,7 @@ class MainController extends Controller
             return response()->json('Oops, Something went wrong');
         }       
     }
+    
     function editCraft(Request $request)
     {       
         //return response()->json(['data'=>$craftId]);
