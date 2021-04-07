@@ -9,6 +9,7 @@ use App\Models\Art;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use DB;
 class MainController extends Controller
 {
     protected $password;
@@ -248,7 +249,7 @@ class MainController extends Controller
     function getDashboardPage()
     {
         return view('artist.dashboard');
-    }
+    }    
     function addCraft(Request $request){
        
         //validating logic
@@ -355,5 +356,36 @@ class MainController extends Controller
         return response()->json(['error'=>"Oops, Something went wrong"]);
     }      
 
+    }
+  
+    /*routing to the find artist page */
+    function getFindArtistPage()
+    {
+        $users = DB::table('users')->select('id', 'first_name', 'last_name', 'description', 'profile_photo')->get();
+        return view('artist.findArtist', ['users' => $users]);
+    }
+
+    function searchArtist(Request $request){
+        $search = $request->search;        
+        $users = DB::table('users')->select('id', 'first_name', 'last_name', 'description', 'profile_photo')->where("talent","LIKE","%{$search}%")->orWhere("description","LIKE","%{$search}%")->get();        
+        $output = array();
+        foreach ($users as $user) {
+            array_push($output, "<div class='profile' onclick='checkProfile()'>
+                            <div class='profile_img'>
+                                <img class='img' src='$user->profile_photo' alt='Profile_photo'>
+                            </div>
+                            <div class='profile_content'>
+                                <span class='profile_name'>
+                                    <p>$user->first_name  $user->last_name</p>
+                                </span>
+                                <span class='profile_info'>
+                                    <p>$user->description</p>
+                                </span>
+                            </div>
+
+                        </div>");
+        }
+        return response()->json($output);
+       
     }
 }
